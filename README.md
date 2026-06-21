@@ -1,2 +1,0 @@
-# KTLT
-KTLT
