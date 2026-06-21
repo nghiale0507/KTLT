@@ -1,0 +1,49 @@
+
+==============================================================================
+          HE THONG QUAN LY SINH VIEN VA DIEM SO - MI3310 KTLT
+==============================================================================
+  1. Hien thi danh sach sinh vien
+  2. Them sinh vien
+  3. Cap nhat thong tin sinh vien
+  4. Xoa sinh vien
+  5. Hien thi danh sach mon hoc
+  6. Nhap / cap nhat diem theo MSSV va ma mon
+  7. Tim kiem va hien thi bang diem cua mot sinh vien
+  8. In bang diem cua lop hoc phan
+  9. Sap xep danh sach sinh vien theo MSSV / ten
+ 10. Bao cao in de nop va ky danh sach thi
+ 11. Xuat giao dien GUI Dashboard dang HTML
+  0. Luu du lieu va ket thuc
+------------------------------------------------------------------------------
+Nhap lua chon: 
+DANH SACH SINH VIEN
+----------------------------------------------------------------------------------------------------------------------
+MSSV         Ho ten                   Lop         Ngay sinh    Gioi     TC         TB10      GPA4    Xep loai
+----------------------------------------------------------------------------------------------------------------------
+202419014    Dao Van Tuyen            MI2-01      2006-05-19   Nam      8          8.31      3.44    Gioi
+202400106    Do Thanh Dat             MI2-03      2006-09-05   Nam      2          5.90      2.00    Trung binh
+202400104    Hoang Gia Bao            MI2-02      2006-06-09   Nam      3          3.90      0.00    Kem
+202418954    Le Nguyen Huu Nghia      MI2-01      2006-08-12   Nam      8          8.08      3.19    Gioi
+202400101    Nguyen Minh Anh          MI2-01      2006-01-03   Nu       6          8.75      3.75    Gioi
+202400103    Pham Thu Ha              MI2-02      2006-03-20   Nu       3          8.00      3.50    Gioi
+202400102    Tran Quang Huy           MI2-01      2006-02-14   Nam      6          6.78      2.50    Kha
+202400105    Vu Khanh Linh            MI2-02      2006-11-28   Nu       3          7.10      3.00    Kha
+----------------------------------------------------------------------------------------------------------------------
+
+==============================================================================
+          HE THONG QUAN LY SINH VIEN VA DIEM SO - MI3310 KTLT
+==============================================================================
+  1. Hien thi danh sach sinh vien
+  2. Them sinh vien
+  3. Cap nhat thong tin sinh vien
+  4. Xoa sinh vien
+  5. Hien thi danh sach mon hoc
+  6. Nhap / cap nhat diem theo MSSV va ma mon
+  7. Tim kiem va hien thi bang diem cua mot sinh vien
+  8. In bang diem cua lop hoc phan
+  9. Sap xep danh sach sinh vien theo MSSV / ten
+ 10. Bao cao in de nop va ky danh sach thi
+ 11. Xuat giao dien GUI Dashboard dang HTML
+  0. Luu du lieu va ket thuc
+------------------------------------------------------------------------------
+Nhap lua chon: Da luu du lieu. Ket thuc chuong trinh.

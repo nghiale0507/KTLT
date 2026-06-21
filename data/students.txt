@@ -1,0 +1,8 @@
+202419014|Dao Van Tuyen|MI2-01|2006-05-19|Nam|0987654321|tuyen.dv@example.edu.vn
+202400106|Do Thanh Dat|MI2-03|2006-09-05|Nam|0966666666|dat.dt@example.edu.vn
+202400104|Hoang Gia Bao|MI2-02|2006-06-09|Nam|0944444444|bao.hg@example.edu.vn
+202418954|Le Nguyen Huu Nghia|MI2-01|2006-08-12|Nam|0977123456|nghia.lnh@example.edu.vn
+202400101|Nguyen Minh Anh|MI2-01|2006-01-03|Nu|0911111111|anh.nm@example.edu.vn
+202400103|Pham Thu Ha|MI2-02|2006-03-20|Nu|0933333333|ha.pt@example.edu.vn
+202400102|Tran Quang Huy|MI2-01|2006-02-14|Nam|0922222222|huy.tq@example.edu.vn
+202400105|Vu Khanh Linh|MI2-02|2006-11-28|Nu|0955555555|linh.vk@example.edu.vn

@@ -1,0 +1,6 @@
+MI1110|Giai tich 1|3
+MI1120|Dai so tuyen tinh|3
+IT1110|Tin hoc dai cuong|2
+MI3310|Ky thuat lap trinh|3
+PH1110|Vat ly dai cuong|3
+SSH1111|Triet hoc Mac Lenin|2
