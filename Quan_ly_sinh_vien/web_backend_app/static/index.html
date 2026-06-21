@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Manager Backend App</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">SV</div>
+        <div>
+          <h1>Student Manager</h1>
+          <p>Backend App</p>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-view="dashboard">Tổng quan</button>
+        <button class="nav-btn" data-view="students">Sinh viên</button>
+        <button class="nav-btn" data-view="courses">Môn học</button>
+        <button class="nav-btn" data-view="sections">Lớp học phần</button>
+        <button class="nav-btn" data-view="grades">Bảng điểm</button>
+        <button class="nav-btn" data-view="examReport">Danh sách thi</button>
+      </nav>
+      <div class="side-note">
+        <strong>Chế độ backend thật</strong>
+        <span>Dữ liệu được đọc/ghi vào thư mục <code>data/</code> của project gốc.</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Quản lý sinh viên C++</p>
+          <h2 id="pageTitle">Tổng quan</h2>
+        </div>
+        <div class="top-actions">
+          <input id="globalSearch" type="search" placeholder="Tìm kiếm nhanh..." />
+          <button id="refreshBtn" class="btn secondary">Làm mới</button>
+          <button id="themeBtn" class="btn ghost">Sáng/Tối</button>
+        </div>
+      </header>
+
+      <section id="toast" class="toast hidden"></section>
+
+      <section id="dashboard" class="view active">
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-head">
+              <h3>Top sinh viên</h3>
+              <span>Theo điểm TB hệ 10</span>
+            </div>
+            <div id="topStudents" class="rank-list"></div>
+          </article>
+          <article class="card">
+            <div class="card-head">
+              <h3>Phân bố xếp loại</h3>
+              <span>Thống kê động</span>
+            </div>
+            <div id="distribution" class="bars"></div>
+          </article>
+        </div>
+        <article class="card">
+          <div class="card-head">
+            <h3>Top điểm học phần</h3>
+            <span>Cập nhật từ grades.txt</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Sinh viên</th><th>Môn</th><th>Lớp HP</th><th>Tổng kết</th><th>Hệ 4</th></tr></thead>
+              <tbody id="topGradesBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section id="students" class="view">
+        <div class="section-grid">
+          <article class="card form-card">
+            <div class="card-head"><h3>Thêm / sửa sinh viên</h3><span>Ghi vào students.txt</span></div>
+            <form id="studentForm" class="form-grid">
+              <input name="id" placeholder="Mã sinh viên" required />
+              <input name="fullName" placeholder="Họ và tên" required />
+              <input name="className" placeholder="Lớp" />
+              <input name="birthDate" placeholder="YYYY-MM-DD" />
+              <select name="gender"><option>Nam</option><option>Nữ</option><option>Khác</option></select>
+              <input name="phone" placeholder="Số điện thoại" />
+              <input name="email" placeholder="Email" class="span-2" />
+              <div class="form-actions span-2">
+                <button class="btn primary" type="submit">Lưu sinh viên</button>
+                <button class="btn secondary" type="button" id="resetStudentForm">Nhập mới</button>
+              </div>
+            </form>
+          </article>
+          <article class="card">
+            <div class="card-head"><h3>Danh sách sinh viên</h3><span id="studentCount"></span></div>
+            <div class="table-wrap tall">
+              <table>
+                <thead><tr><th>MSSV</th><th>Họ tên</th><th>Lớp</th><th>ĐTB</th><th>GPA</th><th>Xếp loại</th><th>Thao tác</th></tr></thead>
+                <tbody id="studentsBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="courses" class="view">
+        <div class="section-grid">
+          <article class="card form-card">
+            <div class="card-head"><h3>Thêm môn học</h3><span>Ghi vào courses.txt</span></div>
+            <form id="courseForm" class="form-grid">
+              <input name="id" placeholder="Mã môn" required />
+              <input name="name" placeholder="Tên môn học" required />
+              <input name="credits" type="number" min="1" placeholder="Tín chỉ" required />
+              <div class="form-actions span-2"><button class="btn primary">Thêm môn học</button></div>
+            </form>
+          </article>
+          <article class="card">
+            <div class="card-head"><h3>Danh sách môn học</h3><span id="courseCount"></span></div>
+            <div class="table-wrap"><table><thead><tr><th>Mã môn</th><th>Tên môn</th><th>Tín chỉ</th></tr></thead><tbody id="coursesBody"></tbody></table></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="sections" class="view">
+        <div class="section-grid">
+          <article class="card form-card">
+            <div class="card-head"><h3>Thêm lớp học phần</h3><span>Ghi vào sections.txt</span></div>
+            <form id="sectionForm" class="form-grid">
+              <input name="id" placeholder="Mã lớp HP" required />
+              <select name="courseId" id="sectionCourseSelect" required></select>
+              <input name="semester" placeholder="Học kỳ" />
+              <input name="academicYear" placeholder="Năm học" />
+              <input name="lecturer" placeholder="Giảng viên" class="span-2" />
+              <div class="form-actions span-2"><button class="btn primary">Thêm lớp học phần</button></div>
+            </form>
+          </article>
+          <article class="card">
+            <div class="card-head"><h3>Danh sách lớp học phần</h3><span id="sectionCount"></span></div>
+            <div class="table-wrap"><table><thead><tr><th>Mã lớp HP</th><th>Môn học</th><th>Học kỳ</th><th>Năm học</th><th>Giảng viên</th></tr></thead><tbody id="sectionsBody"></tbody></table></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="grades" class="view">
+        <div class="section-grid">
+          <article class="card form-card">
+            <div class="card-head"><h3>Thêm / cập nhật điểm</h3><span>Ghi vào grades.txt</span></div>
+            <form id="gradeForm" class="form-grid">
+              <select name="studentId" id="gradeStudentSelect" required></select>
+              <select name="courseId" id="gradeCourseSelect" required></select>
+              <select name="sectionId" id="gradeSectionSelect" required></select>
+              <input name="processScore" type="number" step="0.1" min="0" max="10" placeholder="Quá trình" required />
+              <input name="midtermScore" type="number" step="0.1" min="0" max="10" placeholder="Giữa kỳ" required />
+              <input name="finalScore" type="number" step="0.1" min="0" max="10" placeholder="Cuối kỳ" required />
+              <div class="form-actions span-2"><button class="btn primary">Lưu điểm</button></div>
+            </form>
+          </article>
+          <article class="card">
+            <div class="card-head"><h3>Bảng điểm</h3><span id="gradeCount"></span></div>
+            <div class="filters">
+              <select id="gradeSectionFilter"><option value="">Tất cả lớp học phần</option></select>
+              <button id="exportGrades" class="btn secondary">Xuất CSV</button>
+            </div>
+            <div class="table-wrap tall">
+              <table>
+                <thead><tr><th>MSSV</th><th>Họ tên</th><th>Môn</th><th>Lớp HP</th><th>QT</th><th>GK</th><th>CK</th><th>Tổng</th><th>Thao tác</th></tr></thead>
+                <tbody id="gradesBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="examReport" class="view">
+        <article class="card no-print">
+          <div class="card-head">
+            <h3>Báo cáo danh sách thi</h3>
+            <span>In danh sách sinh viên đủ điều kiện dự thi / ký tên</span>
+          </div>
+          <div class="filters report-tools">
+            <select id="examSectionSelect"><option value="">Chọn lớp học phần</option></select>
+            <button id="loadExamReport" class="btn primary">Tạo báo cáo</button>
+            <button id="printExamReport" class="btn secondary">In báo cáo</button>
+            <button id="exportExamReport" class="btn secondary">Xuất CSV</button>
+          </div>
+          <p class="hint">Quy tắc trạng thái giống bản console gốc: điểm quá trình từ 4.0 trở lên là <strong>Đủ điều kiện</strong>, dưới 4.0 là <strong>Cần xem xét</strong>.</p>
+        </article>
+
+        <article id="examPrintable" class="card report-card">
+          <div class="report-header">
+            <div>
+              <h3 id="reportSchool">TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI</h3>
+              <p id="reportFaculty">KHOA TOÁN - TIN</p>
+            </div>
+            <div class="report-summary">
+              <span id="reportTotal">Tổng: 0</span>
+              <span id="reportEligible">Đủ ĐK: 0</span>
+              <span id="reportReview">Cần xem xét: 0</span>
+            </div>
+          </div>
+          <h2 class="report-title" id="reportTitle">DANH SÁCH SINH VIÊN ĐỦ ĐIỀU KIỆN DỰ THI / KÝ TÊN</h2>
+          <div class="report-meta">
+            <p id="reportCourse">Môn học: --</p>
+            <p id="reportSection">Lớp học phần: --</p>
+            <p id="reportLecturer">Giảng viên: --</p>
+          </div>
+          <div class="table-wrap">
+            <table class="report-table">
+              <thead>
+                <tr><th>STT</th><th>MSSV</th><th>Họ tên</th><th>Lớp</th><th>Điểm QT</th><th>Điểm tổng</th><th>Trạng thái</th><th>Ký tên</th></tr>
+              </thead>
+              <tbody id="examReportBody">
+                <tr><td colspan="8" class="empty-row">Chọn lớp học phần rồi bấm “Tạo báo cáo”.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="signature-row">
+            <div>Hà Nội, ngày .... tháng .... năm 2026</div>
+            <div class="signature-grid">
+              <strong>Cán bộ coi thi</strong>
+              <strong>Giảng viên phụ trách</strong>
+              <strong>Đại diện lớp</strong>
+            </div>
+          </div>
+        </article>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
